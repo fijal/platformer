@@ -229,6 +229,7 @@ class ExternalCompilationInfo(object):
         return d
 
     def convert_sources_to_files(self, cache_dir=None, main_clause=None):
+        from platformer import udir
         if not self.separate_module_sources:
             return self
         if cache_dir is None:
