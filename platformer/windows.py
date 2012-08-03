@@ -3,7 +3,7 @@
 import py, os, sys, re
 
 from platformer import CompilationError
-from platformer import log, _run_subprocess
+from platformer import _run_subprocess
 from platformer import Platform, posix
 
 def _get_compiler_type(cc, x64_flag):
@@ -82,7 +82,7 @@ def find_msvc_env(x64flag=False):
 
         if env is not None:
             return env
-    log.error("Could not find a Microsoft Compiler")
+    #log.error("Could not find a Microsoft Compiler")
     # Assume that the compiler is already part of the environment
 
 class MsvcPlatform(Platform):
@@ -237,9 +237,9 @@ class MsvcPlatform(Platform):
             stderr = stdout + stderr
             errorfile = outname.new(ext='errors')
             errorfile.write(stderr, mode='wb')
-            stderrlines = stderr.splitlines()
-            for line in stderrlines:
-                log.ERROR(line)
+            #stderrlines = stderr.splitlines()
+            #for line in stderrlines:
+            #    log.ERROR(line)
             raise CompilationError(stdout, stderr)
 
 
@@ -362,7 +362,7 @@ class MsvcPlatform(Platform):
             path = path_to_makefile.makefile_dir
         else:
             path = path_to_makefile
-        log.execute('make %s in %s' % (" ".join(extra_opts), path))
+        #log.execute('make %s in %s' % (" ".join(extra_opts), path))
         oldcwd = path.chdir()
         try:
             returncode, stdout, stderr = _run_subprocess(
